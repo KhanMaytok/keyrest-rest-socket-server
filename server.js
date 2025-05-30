@@ -1,7 +1,9 @@
 const express = require('express');
+const app = express();
 const http = require('http');
-const { app, server } = require('socket.io');
-const { createClient } = require('redis');
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(server);
 //const { createAdapter } = require('@socket.io/redis-adapter');
 
 // Redis clients
@@ -9,11 +11,6 @@ const { createClient } = require('redis');
 //const subClient = pubClient.duplicate();
 
 // Socket.IO server
-const io = new server(app, {
-  cors: { origin: '*' },
-  // adapter: createAdapter(pubClient, subClient)
-});
-
 io.on('connection', (socket) => {
   console.log('Client connected:', socket.id);
 
@@ -26,6 +23,10 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     console.log('Client disconnected:', socket.id);
   });
+});
+
+app.get('/', (req, res) => {
+  res.send('<h1>Hello world</h1>');
 });
 
 // Start server
