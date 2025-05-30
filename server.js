@@ -2,11 +2,11 @@ const express = require('express');
 const http = require('http');
 const { app, server } = require('socket.io');
 const { createClient } = require('redis');
-const { createAdapter } = require('@socket.io/redis-adapter');
+//const { createAdapter } = require('@socket.io/redis-adapter');
 
 // Redis clients
-const pubClient = createClient({ host: process.env.REDIS_HOST, port: process.env.REDIS_PORT });
-const subClient = pubClient.duplicate();
+//const pubClient = createClient({ host: process.env.REDIS_HOST, port: process.env.REDIS_PORT });
+//const subClient = pubClient.duplicate();
 
 // Socket.IO server
 const io = new server(app, {
