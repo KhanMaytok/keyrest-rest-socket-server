@@ -29,9 +29,9 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
   console.log("Client connected:", socket.id);
 
-  socket.on("sent_product", (data) => {
+  socket.on("send_to_kitchen", (data) => {
     console.log("Order received:", data);
-    io.emit("new_order", data); // Broadcast to all clients
+    io.emit("new_order_detail", data); // Broadcast to all clients
   });
 
   socket.on("disconnect", () => {
