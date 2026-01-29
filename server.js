@@ -29,6 +29,11 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
   console.log("Client connected:", socket.id);
 
+  socket.on("get_printers_from_host", (data) => {
+    console.log("Order received:", data);
+    io.emit("get_printers_from_host", data); // Broadcast to all clients
+  });
+
   socket.on("send_to_kitchen", (data) => {
     console.log("Order received:", data);
     io.emit("new_order_detail", data); // Broadcast to all clients
